@@ -20,7 +20,7 @@ public class ApplicationUser implements UserDetails {
     String password;
     String firstName;
     String lastname;
-    String dateOfBirth;
+//    String dateOfBirth;
     String bio;
 
     public ApplicationUser(){}
@@ -30,7 +30,7 @@ public class ApplicationUser implements UserDetails {
         this.password = password;
         this.firstName = firstName;
         this.lastname = lastname;
-        this.dateOfBirth = dateOfBirth;
+//        this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
 
@@ -47,26 +47,60 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+
+//    ----- getters & setters -----
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
