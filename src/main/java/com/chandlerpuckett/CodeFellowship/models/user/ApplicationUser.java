@@ -3,11 +3,9 @@ package com.chandlerpuckett.CodeFellowship.models.user;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -20,20 +18,19 @@ public class ApplicationUser implements UserDetails {
     String password;
     String firstName;
     String lastname;
-//    String dateOfBirth;
+    Date dateOfBirth;
     String bio;
 
     public ApplicationUser(){}
 
-    public ApplicationUser(String username, String password, String firstName, String lastname, String dateOfBirth, String bio) {
+    public ApplicationUser(String username, String password, String firstName, String lastname, Date dateOfBirth, String bio) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastname = lastname;
-//        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -71,6 +68,13 @@ public class ApplicationUser implements UserDetails {
     }
 
 //    ----- getters & setters -----
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -102,5 +106,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
