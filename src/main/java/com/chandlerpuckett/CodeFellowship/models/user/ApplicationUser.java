@@ -18,12 +18,20 @@ public class ApplicationUser implements UserDetails {
 
     String username;
     String password;
+    String firstName;
+    String lastname;
+    String dateOfBirth;
+    String bio;
 
     public ApplicationUser(){}
 
-    public ApplicationUser(String username, String password) {
+    public ApplicationUser(String username, String password, String firstName, String lastname, String dateOfBirth, String bio) {
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+        this.bio = bio;
     }
 
 
