@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
-<body>
+    <body>
+        <header>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+        </header>
 
-</body>
+        <form action="/login" method="POST">
+            <legend>Login</legend>
+            User Name <input type="text" name="username">
+            Password <input type="text" name="password">
+
+            <input type="submit">
+        </form>
+
+    </body>
 </html>

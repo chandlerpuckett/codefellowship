@@ -3,5 +3,5 @@ package com.chandlerpuckett.CodeFellowship.models.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
-//    ApplicationUser findByUserName(String username);
+    ApplicationUser findByUsername(String username);
 }
