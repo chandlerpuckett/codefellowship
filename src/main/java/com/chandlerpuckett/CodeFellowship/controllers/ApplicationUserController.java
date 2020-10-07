@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,15 +23,25 @@ public class ApplicationUserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    @GetMapping("/user/{username}")
-//    public String showUserDetails(@PathVariable String username){
-//        ApplicationUser user = applicationUserRepository.findByUserName(username);
-//
-//        if(user == null){
-////            throw new Exception("user not found");
-//        }
-//        return "user";
-//    }
+    @GetMapping("/login")
+    public String showLoginPage(){
+        System.out.println("---- navigating to login page -----");
+
+        return ("login");
+    }
+
+    @PostMapping("/login")
+    public String showUserDetails(@PathVariable String username, Model m){
+        ApplicationUser user = applicationUserRepository.findByUsername(username);
+        System.out.println("++++ found user ++++ " + username);
+        m.addAttribute("user",user);
+
+        if(user == null){
+//            throw new Exception("user not found");
+            m.addAttribute("user not found", true);
+        }
+        return "user";
+    }
 
     @GetMapping("/signup")
     public String signUpNewUser(){
@@ -57,9 +68,8 @@ public class ApplicationUserController {
                 lastName,
                 dateOfBirth,
                 bio);
-
         applicationUserRepository.save(newUser);
 
-        return new RedirectView("login");
+        return new RedirectView("/login");
     }
 }
