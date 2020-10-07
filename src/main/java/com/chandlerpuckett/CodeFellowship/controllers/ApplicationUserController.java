@@ -4,7 +4,12 @@ import com.chandlerpuckett.CodeFellowship.models.user.ApplicationUser;
 import com.chandlerpuckett.CodeFellowship.models.user.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
 
@@ -22,17 +29,20 @@ public class ApplicationUserController {
     ApplicationUserRepository applicationUserRepository;
 
     @Autowired
+    protected AuthenticationManager authenticationManager;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+//    ----- Login Routes -----
     @GetMapping("/login")
     public String showLoginPage(Principal principal, Model m){
-        m.addAttribute("principal", principal);
+        m.addAttribute("user",principal);
         System.out.println("---- navigating to login page -----");
-
         return ("login");
     }
 
-    @PostMapping("/login")
+    @PostMapping("/user/{username}")
     public String showUserDetails(@PathVariable String username, Model m){
         ApplicationUser user = applicationUserRepository.findByUsername(username);
         System.out.println("++++ found user ++++ " + username);
@@ -41,36 +51,48 @@ public class ApplicationUserController {
         if(user == null){
             m.addAttribute("user not found", true);
         }
-        return "user";
+        return ("user");
     }
 
+//    ----- Sign Up Routes -----
     @GetMapping("/signup")
-    public String signUpNewUser(){
-        System.out.println("entered sign up route");
-
+    public String signUpNewUser(Principal principal, Model m){
         return ("signup");
     }
 
-    @DateTimeFormat(pattern="MM-dd-yyyy")
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     @PostMapping("/signup")
-    public RedirectView makeNewUser(String username,
+    public RedirectView makeNewUser(HttpServletRequest request,
+                                    String username,
                                     String password,
                                     String firstName,
                                     String lastName,
                                     Date dateOfBirth,
-                                    String bio)
-    {
+                                    String bio) throws Exception {
         System.out.println("----- adding a user to the DB -----");
-        password = passwordEncoder.encode(password);
+
+
+        String passwordEncode = passwordEncoder.encode(password);
 
         ApplicationUser newUser = new ApplicationUser(username,
-                password,
+                passwordEncode,
                 firstName,
                 lastName,
                 dateOfBirth,
                 bio);
         applicationUserRepository.save(newUser);
 
-        return new RedirectView("/login");
+        validate(username,password,request);
+        return new RedirectView("/users");
     }
+
+    private void validate (String username, String password, HttpServletRequest request) throws Exception {
+        try{
+            request.login(username,password);
+        }catch (ServletException error){
+            System.out.println(error);
+            throw new Exception("trouble logging in");
+        }
+    }
+
 }

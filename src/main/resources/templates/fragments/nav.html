@@ -11,5 +11,6 @@
             <li><a href="/login">Login</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
+        <h3 th:if="${user}" th:text="'Logged In: ' + ${user.getName()}"></h3>
     </nav>
 </html>

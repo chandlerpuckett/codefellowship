@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.security.Principal;
 
 @Controller
-public class HomeController {
+public class UsersController {
 
-    @GetMapping("/")
-    public String homePage(Principal principal, Model m){
-        m.addAttribute("user",principal);
-        return "home";
+    @GetMapping("/users")
+    public String showUserPage(Principal principal, Model m){
+        m.addAttribute("user", principal);
+        return "users";
     }
 }
