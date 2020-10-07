@@ -9,7 +9,7 @@ Ahoy! Join thee codeFellow*SHIP*
 - from the home page visit `sign up` to sign up as a new user
 
 
-## Feature Tasks
+## Lab 16-17 Feature Tasks
 - [X] Splash page at `(/)` with links to "sign up" page
 - [X] ApplicationUser with username, password, firstName, lastName,
 dateOfBirth, bio
@@ -27,3 +27,13 @@ dateOfBirth, bio
     - [ ] logged in user should be able to create a `Post` and the post should belong to the 
             user that created it
 - [ ] users posts should be visible on their profile page
+
+
+### Lab 18 Feature Tasks
+- [X] Ensure users can't perform SQL Injection
+- [ ] Allow users to follow other users
+     - [ ] posts show up in the logged in users "feed" 
+- [ ] user page index to discover other users
+- [ ] display a follow button for users *(will require a self-join on AppUsers)*
+- [ ] user can visit `/feed` to view all posts from the users that they follow
+    - [ ] post should have a link to the profile of post author

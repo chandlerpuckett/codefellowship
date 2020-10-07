@@ -5,10 +5,7 @@
     <title>Login</title>
 </head>
     <body>
-        <header>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-        </header>
+        <header th:insert="fragments/nav :: nav"></header>
 
         <form action="/login" method="POST">
             <legend>Login</legend>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.sql.Date;
 
 @Controller
@@ -24,7 +25,8 @@ public class ApplicationUserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public String showLoginPage(){
+    public String showLoginPage(Principal principal, Model m){
+        m.addAttribute("principal", principal);
         System.out.println("---- navigating to login page -----");
 
         return ("login");
