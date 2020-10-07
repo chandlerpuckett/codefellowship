@@ -32,6 +32,13 @@ public class ApplicationUserController {
 //        return "user";
 //    }
 
+    @GetMapping("/signup")
+    public String signUpNewUser(){
+        System.out.println("entered sign up route");
+
+        return ("signup");
+    }
+
     @DateTimeFormat(pattern="MM-dd-yyyy")
     @PostMapping("/newuser")
     public RedirectView makeNewUser(String username,
@@ -41,7 +48,7 @@ public class ApplicationUserController {
                                     Date dateOfBirth,
                                     String bio)
     {
-        System.out.println("adding a user");
+        System.out.println("----- adding a user to the DB -----");
         password = passwordEncoder.encode(password);
 
         ApplicationUser newUser = new ApplicationUser(username,
@@ -53,6 +60,6 @@ public class ApplicationUserController {
 
         applicationUserRepository.save(newUser);
 
-        return new RedirectView("/");
+        return new RedirectView("login");
     }
 }

@@ -5,9 +5,23 @@
     <title>User Sign Up</title>
 </head>
 <body>
-<form action="/login" method="post">
-    UserName
-</form>
+    <header>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+    </header>
+
+    <h1>Ahoy!</h1>
+    <form action="/login" method="POST">
+        <legend>Sign Up!</legend>
+        UserName <input type="text" name="username">
+        password <input type="text" name="password">
+        First Name <input type="text" name="firstName">
+        Last Name <input type="text" name="lastName">
+        DOB <input type="Date" name="dateOfBirth">
+        Bio <input type="text" name="bio">
+
+        <input type="submit">
+    </form>
 
 </body>
 </html>
