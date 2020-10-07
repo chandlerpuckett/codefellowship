@@ -37,7 +37,6 @@ public class ApplicationUserController {
         m.addAttribute("user",user);
 
         if(user == null){
-//            throw new Exception("user not found");
             m.addAttribute("user not found", true);
         }
         return "user";
