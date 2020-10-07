@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"username"})})
 public class ApplicationUser implements UserDetails {
 
     @Id
