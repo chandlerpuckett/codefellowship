@@ -71,9 +71,7 @@ public class ApplicationUserController {
                                     String bio) throws Exception {
         System.out.println("----- adding a user to the DB -----");
 
-
         String passwordEncode = passwordEncoder.encode(password);
-
         ApplicationUser newUser = new ApplicationUser(username,
                 passwordEncode,
                 firstName,
@@ -82,17 +80,7 @@ public class ApplicationUserController {
                 bio);
         applicationUserRepository.save(newUser);
 
-        validate(username,password,request);
+        request.login(username,password);
         return new RedirectView("/users");
     }
-
-    private void validate (String username, String password, HttpServletRequest request) throws Exception {
-        try{
-            request.login(username,password);
-        }catch (ServletException error){
-            System.out.println(error);
-            throw new Exception("trouble logging in");
-        }
-    }
-
 }
