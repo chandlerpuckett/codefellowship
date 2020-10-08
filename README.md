@@ -1,7 +1,7 @@
 # CodeFellowship App
 
 ## Summary
-Ahoy! Join thee codeFellow*SHIP*
+Ahoy! Join thee codeFellow***SHIP***
 
 ## Operation
 - start Spring from `CodeFellowshipApplication`
