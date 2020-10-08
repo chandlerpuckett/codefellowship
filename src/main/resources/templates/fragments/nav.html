@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-    <body>
-
-    </body>
+    <nav th:fragment="nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+        <h3 th:if="${user}" th:text="'Logged In: ' + ${user.getName()}"></h3>
+    </nav>
 </html>

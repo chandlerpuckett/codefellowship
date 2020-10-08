@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>User Details</title>
 </head>
 <body>
     <header th:insert="fragments/nav :: nav"></header>
+    <h1>User Page</h1>
 
-    <h1>Code FellowShip</h1>
-    <img src="/images/ship2.gif" alt="">
+    <h2 th:text="${user.getName()}"></h2>
 </body>
 </html>

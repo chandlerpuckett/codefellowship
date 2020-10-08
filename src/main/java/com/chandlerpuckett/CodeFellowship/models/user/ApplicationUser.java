@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"username"})})
 public class ApplicationUser implements UserDetails {
 
     @Id
@@ -39,7 +40,7 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
